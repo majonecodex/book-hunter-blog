@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Reflection</title>
+
+  <!-- Google Fonts: EB Garamond (Body) & Libre Baskerville (Headings) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <header>
+     <a href="index.html" class="logo">Journal</a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="reading-list.html">Reading List</a>
+            </nav>
+    </header>
+
+    <main>
+      <article>
+        <h1>On Doomscrolling and Reclaiming Focus</h1>
+        <div class="post-meta">Published September 2026 • 2 min read</div>
+
+        <p>Hey, is there anyone into reading books?</p>
+
+        <p>Like, not recently— long time ago.</p>
+
+        <p>I've found that binge-watching anime is no longer entertaining to me.</p>
+
+        <p>All interests have been destroyed by doomscrolling and AI slop.</p>
+
+        <p>I am not trying to endorse/promote anything like anti-something, following upside-down internet trends, etc.</p>
+
+        <p>This is based on my experience as a full-time software engineering student at university, where I have gone through rough times, either financially or socially, and felt insecure. My most significant behaviour since the global lockdown has been doomscrolling.</p>
+
+        <figure class="book-media">
+            <img src="https://images.pexels.com/photos/19252537/pexels-photo-19252537.jpeg" alt="Book and cup of coffee on a table">
+            <figcaption>
+            Reclaiming quiet time with a physical book. 
+                <span style="display: block; font-size: 0.85rem; color: #8a857b; margin-top: 0.25rem;">
+                    Photo by <a href="https://www.pexels.com/photo/book-and-cup-of-coffee-on-a-table-19252537/" target="_blank" rel="noopener" style="color: #7a756b;">Saliha Büyükkaya Gülhan</a> on Pexels
+                </span>
+            </figcaption>
+        </figure>
+
+        <blockquote>
+          "Doomscrolling appears as a vicious cycle in which users find themselves get stuck in a pattern of seeking negative information no matter how bad the news is."
+        </blockquote>
+
+        <p>Why doomscrolling? Is that bad? It is a big YES. In my opinion, it has impacted my productivity, such as sharpening my coding skills and critical thinking. I can quote a fact from a research paper where <b>doomscrolling appears as a vicious cycle in which users find themselves get stuck in a pattern of seeking negative information no matter how bad the news is </b> (Satici et al., 2023).</p>
+
+        <p>The point is, I am writing this post for my own well-being and also to indirectly bring awareness to the public. Therefore, I used to read books every week since middle school and . Anyway, that piece of brick is annoying - smartphone.</p>
+
+        <p>If you have read something in your free time, let me know in comments - I kind of clueless here about which title I should read.</p>
+
+        <p>Ciao.</p>
+
+        <div class="references">
+          <h2>Reference</h2>
+          <p>Satici, S. A., Gocet Tekin, E., Deniz, M. E., & Satici, B. (2022). <em>Doomscrolling Scale: its Association with Personality Traits, Psychological Distress, Social Media Use, and Wellbeing</em>. Applied Research in Quality of Life, 18(2), 833–847. <a href="https://doi.org/10.1007/s11482-022-10110-7" target="_blank" rel="noopener">https://doi.org/10.1007/s11482-022-10110-7</a>
+‌           </p>
+        </div>
+      </article>
+    </main>
+
+    <!-- Supabase Client Library -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<section class="guestbook-section">
+  <h2 style="font-family: 'Libre Baskerville', serif; font-size: 1.2rem; color: #3a362e; margin-bottom: 1rem;">
+    Guestbook & Recommendations
+  </h2>
+
+  <!-- Input Form -->
+  <form id="commentForm" class="guestbook-form">
+    <input type="text" id="nickname" placeholder="Nickname / Name" required class="guestbook-input">
+    <textarea id="content" rows="3" placeholder="Leave a comment or book title..." required class="guestbook-textarea"></textarea>
+    <button type="submit" class="guestbook-btn">Post Comment</button>
+  </form>
+
+  <!-- Published Comments Stream -->
+  <div id="commentsList">
+    <p style="font-style: italic; color: #8a857b;">Loading comments...</p>
+  </div>
+</section>
+
+<script>
+  // Replace with your project details from Supabase (Project Settings -> API)
+  const SUPABASE_URL = 'https://gpjzoiaikuwnfobwtftz.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdwanpvaWFpa3V3bmZvYnd0ZnR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkxNjAzMjAsImV4cCI6MjEwNDczNjMyMH0.0eDDirX0hWw0x0QTSIiHQL4Y9MMNzqnbz1SUgS_aehE';
+  const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const form = document.getElementById('commentForm');
+  const commentsList = document.getElementById('commentsList');
+
+  // Fetch and display existing comments
+  async function loadComments() {
+    const { data, error } = await db
+      .from('comments')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error || !data) {
+      commentsList.innerHTML = '<p style="font-style: italic;">No comments yet. Be the first!</p>';
+      return;
+    }
+
+    commentsList.innerHTML = data.map(c => `
+      <div class="comment-entry">
+        <div class="comment-header">${escapeHtml(c.nickname)}</div>
+        <div class="comment-body">${escapeHtml(c.content)}</div>
+      </div>
+    `).join('');
+  }
+
+  // Handle new submission
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const nickname = document.getElementById('nickname').value;
+    const content = document.getElementById('content').value;
+
+    await db.from('comments').insert([{ nickname, content }]);
+    form.reset();
+    loadComments(); // Refresh list immediately
+  });
+
+  // Helper to prevent HTML injection/XSS
+  function escapeHtml(str) {
+    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  loadComments();
+</script>
+
+    <footer>
+      <p>© 2026 — Personal Journal</p>
+    </footer>
+  </div>
+
+</body>
+</html>

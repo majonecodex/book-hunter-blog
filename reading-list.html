@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reading List — Personal Journal</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Supabase JS Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <a href="index.html" class="site-title">Journal</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="reading-list.html" class="active">Reading List</a>
+    </nav>
+  </header>
+
+  <main>
+    <article>
+      <h1>Reading List</h1>
+      <p class="subtitle">A collection of books replacing digital noise with quiet thought.</p>
+
+      <div class="book-group">
+        <div class="group-title">Books I've Read</div>
+        <div id="readBooksContainer">
+          <p class="empty-state">Loading books...</p>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    © 2026 — Personal Journal
+  </footer>
+</div>
+
+<script>
+  const SUPABASE_URL = 'https://gpjzoiaikuwnfobwtftz.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdwanpvaWFpa3V3bmZvYnd0ZnR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkxNjAzMjAsImV4cCI6MjEwNDczNjMyMH0.0eDDirX0hWw0x0QTSIiHQL4Y9MMNzqnbz1SUgS_aehE';
+  const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const readBooksContainer = document.getElementById('readBooksContainer');
+
+  async function loadBooks() {
+    const { data, error } = await db
+      .from('read_books')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error || !data || data.length === 0) {
+      readBooksContainer.innerHTML = '<p class="empty-state">Nothing logged yet.</p>';
+      return;
+    }
+
+    readBooksContainer.innerHTML = data.map(b => `
+      <div class="book-item">
+        <div class="book-title">${escapeHtml(b.book_title)}</div>
+        <div class="book-author">by ${escapeHtml(b.book_author)}</div>
+        ${b.notes ? `<div class="book-notes">${escapeHtml(b.notes)}</div>` : ''}
+      </div>
+    `).join('');
+  }
+
+  function escapeHtml(str) {
+    return str ? str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") : '';
+  }
+
+  loadBooks();
+</script>
+
+</body>
+</html>

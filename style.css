@@ -1,0 +1,267 @@
+/* ==========================================================================
+   CSS Reset & Base Book Page Styling
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #F4ECD8; /* Warm book paper color */
+  color: #2b2b2b;            /* Soft charcoal text */
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 1.25rem;        /* 20px base for crisp, comfortable reading */
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Single-Column Container (Book Page Width) */
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem 1.5rem;
+}
+
+/* Minimal Header */
+header {
+  border-bottom: 1px solid #e2ddd3;
+  padding-bottom: 1.5rem;
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-title {
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #5a564e;
+  text-decoration: none;
+}
+
+nav a {
+  font-family: "EB Garamond", serif;
+  font-size: 1.1rem;
+  color: #7a756b;
+  text-decoration: none;
+  margin-left: 1.25rem;
+  transition: color 0.2s ease;
+}
+
+nav a:hover, nav a.active {
+  color: #1a1a1a;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+/* Article Typography */
+article h1 {
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-size: 2.2rem;
+  line-height: 1.3;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.post-meta {
+  font-size: 1rem;
+  font-style: italic;
+  color: #7a756b;
+  margin-bottom: 2.5rem;
+}
+
+/* Paragraph Selector with Justify & Hyphenation */
+article p {
+  margin-bottom: 1.5rem;
+  text-align: justify;
+  text-justify: inter-word;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
+
+/* Blockquote Style (For Quotes & Key Thoughts) */
+blockquote {
+  border-left: 2px solid #a8a297;
+  margin: 2rem 0;
+  padding-left: 1.25rem;
+  font-style: italic;
+  color: #4a463d;
+}
+
+/* Reference & Footer Section */
+.references {
+  margin-top: 3.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2ddd3;
+  font-size: 0.95rem;
+  color: #6a655c;
+}
+
+.references h2 {
+  font-family: "Libre Baskerville", serif;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  color: #3a362e;
+}
+
+.references a {
+  color: #5a564e;
+  word-break: break-all;
+}
+
+footer {
+  margin-top: 4rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #8a857b;
+}
+
+/* Book-Style Image & Figure Container */
+figure.book-media {
+  margin: 2.5rem 0;
+  text-align: center;
+}
+
+figure.book-media img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 2px;
+  border: 1px solid #e2ddd3; 
+  padding: 6px;
+  background-color: #F4ECD8;
+}
+
+figure.book-media figcaption {
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 1rem;
+  font-style: italic;
+  color: #6a655c;
+  margin-top: 0.75rem;
+  line-height: 1.4;
+}
+
+/* Form Styling */
+.guestbook-section {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e2ddd3;
+}
+
+.guestbook-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.guestbook-input, .guestbook-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #ffffff;
+  border: 1px solid #e2ddd3;
+  border-radius: 2px;
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 1.1rem;
+  color: #2b2b2b;
+}
+
+.guestbook-btn {
+  align-self: flex-start;
+  padding: 0.6rem 1.5rem;
+  background-color: #3a362e;
+  color: #fdfbf7;
+  border: none;
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+/* Individual Comment Entry */
+.comment-entry {
+  padding: 1rem 0;
+  border-bottom: 1px dashed #e2ddd3;
+}
+
+.comment-header {
+  font-family: "Libre Baskerville", serif;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #3a362e;
+  margin-bottom: 0.25rem;
+}
+
+.comment-body {
+  font-size: 1.1rem;
+  color: #4a463d;
+}
+
+/* ==========================================================================
+   Book List Specific Hierarchy
+   ========================================================================== */
+
+.book-group {
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* Section Header (e.g. "Books I've Read") */
+.group-title {
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  border-bottom: 1px solid #e2ddd3;
+  padding-bottom: 0.4rem;
+  margin-bottom: 2rem;
+}
+
+/* Single Book Container */
+.book-item {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px dashed #e2ddd3;
+}
+
+/* Book Title */
+.book-title {
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.2rem;
+}
+
+/* Author Name */
+.book-author {
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: #7a756b;
+  margin-bottom: 0.8rem;
+}
+
+/* Reader Review / Personal Notes */
+.book-notes {
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #4a463d;
+  margin-top: 0.5rem;
+  padding-left: 0.85rem;
+  border-left: 2px solid #c0b9a8;
+  text-align: left; /* Keeps notes clean and left-aligned */
+}
+
+/* Empty State Message */
+.empty-state {
+  font-style: italic;
+  color: #8a857b;
+  font-size: 1.1rem;
+}
