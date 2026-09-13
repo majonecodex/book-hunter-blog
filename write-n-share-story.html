@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Write & Share — Personal Journal</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Supabase JS Client & Central Script -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="js/app.js"></script>
+</head>
+<body>
+
+  <div class="page-turn-container container">
+    <header>
+      <a href="index.html" class="site-title">JOURNAL</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="reading-list.html">Reading List</a>
+        <a href="write-n-share-story.html" class="active">Write & Share</a>
+      </nav>
+    </header>
+
+    <main>
+      <article>
+        <h1>Write & Share Your Story</h1>
+        <p class="subtitle" style="font-style: italic; color: #7a756b; margin-bottom: 2.5rem;">
+          Take a quiet moment to write a reflection, review a favorite book, or share how you reclaim focus.
+        </p>
+
+        <form id="storyForm" class="guestbook-form" style="max-width: 100%;">
+          <label for="storyAuthor" style="display: block; font-family: 'Libre Baskerville', serif; font-size: 0.9rem; color: #3a362e; margin-bottom: 0.5rem;">Author / Pen Name</label>
+          <input type="text" id="storyAuthor" placeholder="e.g. Quiet Reader" required class="guestbook-input" style="width: 100%; box-sizing: border-box;">
+
+          <label for="storyTitle" style="display: block; font-family: 'Libre Baskerville', serif; font-size: 0.9rem; color: #3a362e; margin-bottom: 0.5rem; margin-top: 1rem;">Title / Subject</label>
+          <input type="text" id="storyTitle" placeholder="e.g. Thoughts on Slow Reading" required class="guestbook-input" style="width: 100%; box-sizing: border-box;">
+
+          <label for="storyContent" style="display: block; font-family: 'Libre Baskerville', serif; font-size: 0.9rem; color: #3a362e; margin-bottom: 0.5rem; margin-top: 1rem;">Your Reflections</label>
+          <textarea id="storyContent" rows="8" placeholder="Write your thoughts here..." required class="guestbook-textarea" style="width: 100%; box-sizing: border-box;"></textarea>
+
+          <button type="submit" class="guestbook-btn" style="margin-top: 1.5rem;">Publish Story</button>
+        </form>
+
+        <p id="storyStatus" style="margin-top: 1rem; font-style: italic; color: #6a655c;"></p>
+      </article>
+
+      <!-- Inside index.html inside <main> -->
+<section class="journal-feed">
+  <h1>Recent Stories & Reflections</h1>
+  <section style="margin-top: 3.5rem; border-top: 1px dashed #dcd6cd; padding-top: 2rem;">
+  <h2 style="font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: #3a362e; margin-bottom: 1.25rem;">
+    Community Stories
+  </h2>
+
+  <!-- Filter & Sort Controls -->
+  <div class="story-controls" style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+    <input 
+      type="text" 
+      id="storySearch" 
+      placeholder="Search by title, author, or content..." 
+      class="guestbook-input" 
+      style="flex: 1; min-width: 200px; padding: 0.5rem 0.75rem;"
+    />
+    
+    <select id="storySort" class="guestbook-input" style="padding: 0.5rem 0.75rem; width: auto; cursor: pointer;">
+      <option value="newest">Newest First</option>
+      <option value="title-asc">Title (A – Z)</option>
+      <option value="title-desc">Title (Z – A)</option>
+      <option value="author-asc">Author (A – Z)</option>
+      <option value="author-desc">Author (Z – A)</option>
+    </select>
+  </div>
+
+  <!-- Container for rendered stories -->
+  <div id="storiesContainer">
+    <p style="font-style: italic; color: #8a857b;">Loading stories...</p>
+  </div>
+</section>
+  <!-- Stories from Supabase render here -->
+  <div id="storiesContainer">
+    <p style="font-style: italic; color: #8a857b;">Loading stories...</p>
+  </div>
+</section>
+
+    </main>
+
+    <footer>
+      <p>© 2026 — Personal Journal</p>
+    </footer>
+  </div>
+
+  <!-- Bookmark Back to Top -->
+  <a href="#top" id="backToTopBookmark" aria-label="Back to Top" title="Return to top of page">
+    <span class="bookmark-ribbon"></span>
+    <span class="bookmark-icon">↑</span>
+  </a>
+
+</body>
+</html>

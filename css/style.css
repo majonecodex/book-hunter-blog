@@ -26,11 +26,15 @@ body {
 /* Minimal Header */
 header {
   border-bottom: 1px solid #e2ddd3;
+  background-color: #F4ECD8;
   padding-bottom: 1.5rem;
   margin-bottom: 3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .site-title {
@@ -265,3 +269,233 @@ figure.book-media figcaption {
   color: #8a857b;
   font-size: 1.1rem;
 }
+
+/* ==========================================================================
+   Book Cover Opening Animation
+   ========================================================================== */
+
+#book-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #F4ECD8; /* Matches paper background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  perspective: 1000px;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+#book-loader.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.book-cover {
+  width: 140px;
+  height: 190px;
+  position: relative;
+  transform-style: preserve-3d;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.cover-front, .cover-inside {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 2px 6px 6px 2px;
+}
+
+.cover-front {
+  background-color: #3A362E; /* Charcoal hardcover */
+  border-left: 4px solid #2B2822; /* Spine accent */
+  color: #FDFBF7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-origin: left center;
+  animation: openBook 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.3s;
+  backface-visibility: hidden;
+}
+
+.cover-title {
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid #7A756B;
+  padding: 0.4rem 0.8rem;
+}
+
+.cover-inside {
+  background-color: #EFE6D0; /* Inside paper preview */
+  border-left: 3px solid #D4CEBE;
+  z-index: -1;
+}
+
+@keyframes openBook {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(-140deg);
+  }
+}
+
+/* ==========================================================================
+   Mobile Optimization (Screens under 600px)
+   ========================================================================== */
+
+@media (max-width: 600px) {
+  /* Container padding fix */
+  .container {
+    padding: 2rem 1rem 3rem 1rem;
+  }
+
+  /* Header Layout Fix */
+  header {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    text-align: center;
+  }
+
+  nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  nav a {
+    margin-left: 0; /* Reset desktop left margin */
+    font-size: 1rem;
+  }
+
+  /* Typography Adjustments */
+  article h1 {
+    font-size: 1.75rem;
+    line-height: 1.25;
+  }
+
+  /* Prevent text awkward spacing on narrow screens */
+  article p {
+    text-align: left;
+    hyphens: none;
+    font-size: 1.15rem;
+  }
+
+  /* Form & Button Adjustments */
+  .guestbook-btn {
+    width: 100%; /* Full-width buttons on mobile */
+    text-align: center;
+  }
+
+  /* Scale down book cover animation for smaller screens */
+  .book-cover {
+    width: 110px;
+    height: 150px;
+  }
+}
+
+/* Page Flip Transition Container */
+body {
+  perspective: 1200px; /* Gives depth to the 3D flip */
+  overflow-x: hidden;
+}
+
+.container {
+  transform-origin: left center;
+  transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1), opacity 0.5s ease;
+  backface-visibility: hidden;
+}
+
+/* Page flipping out to the left */
+.container.page-flip-out {
+  transform: rotateY(-90deg);
+  opacity: 0;
+}
+
+/* Page entering from the right */
+.container.page-flip-in-start {
+  transform: rotateY(90deg);
+  opacity: 0;
+}
+
+/* ==========================================================================
+   Bookmark Back-to-Top Style
+   ========================================================================== */
+
+/* Enable smooth scrolling across the page */
+html {
+  scroll-behavior: smooth;
+}
+
+#backToTopBookmark {
+  position: fixed;
+  bottom: 2rem;
+  right: 1.5rem;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 52px;
+  background-color: #8C2D19; /* Rich book ribbon red */
+  color: #F7F4EE;            /* Matching paper cream */
+  text-decoration: none;
+  border-radius: 4px 4px 0 0;
+  box-shadow: -2px 4px 10px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.2s ease;
+}
+
+/* Ribbed cut out at the bottom of the bookmark */
+#backToTopBookmark::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 19px solid transparent;
+  border-right: 19px solid transparent;
+  border-top: 8px solid #8C2D19;
+  transition: border-top-color 0.2s ease;
+}
+
+/* Show bookmark after scrolling down */
+#backToTopBookmark.visible {
+  opacity: 0.9;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#backToTopBookmark:hover {
+  opacity: 1;
+  background-color: #6E2212;
+  transform: translateY(-3px);
+}
+
+#backToTopBookmark:hover::after {
+  border-top-color: #6E2212;
+}
+
+.bookmark-icon {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 1;
+  margin-top: 2px;
+}
+

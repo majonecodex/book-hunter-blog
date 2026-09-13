@@ -4,119 +4,72 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About — Personal Journal</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      background-color: #F4ECD8;
-      color: #2D2B2A;
-      font-family: 'EB Garamond', Georgia, serif;
-      font-size: 1.25rem;
-      line-height: 1.8;
-      padding: 2rem 1rem;
-      display: flex;
-      justify-content: center;
-    }
-    main {
-      max-width: 680px;
-      width: 100%;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 4rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid #E2DDD3;
-    }
-    .logo {
-      font-family: 'Libre Baskerville', serif;
-      font-size: 1.1rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: #2D2B2A;
-    }
-    nav a {
-      color: #6A655C;
-      text-decoration: none;
-      font-size: 1.1rem;
-      margin-left: 1.2rem;
-    }
-    nav a.active {
-      color: #2D2B2A;
-      border-bottom: 1px solid #2D2B2A;
-    }
-    h1 {
-      font-family: 'Libre Baskerville', serif;
-      font-size: 2.2rem;
-      margin-bottom: 1.5rem;
-      font-weight: normal;
-    }
-    article p {
-      margin-bottom: 1.5rem;
-      text-align: justify;
-      text-justify: inter-word;
-      -webkit-hyphens: auto;
-      -ms-hyphens: auto;
-      hyphens: auto;
-    }
-    .signature {
-      font-style: italic;
-      margin-top: 2rem;
-      color: #6A655C;
-    }
-    footer {
-      margin-top: 5rem;
-      text-align: center;
-      font-size: 0.95rem;
-      color: #6A655C;
-    }
-  </style>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/app.js"></script>
 </head>
 <body>
+ 
 
-<main>
-  <header>
-    <a href="index.html" class="logo">Journal</a>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html" class="active">About</a>
-      <a href="reading-list.html">Reading List</a>
-    </nav>
-  </header>
+  <div class="container">
+    <header>
+      <a href="index.html" class="site-title">Journal</a>
+       <nav>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="reading-list.html">Reading List</a>
+  <a href="write-n-share-story.html" class="nav-highlight">Write & Share <span style="font-size: 0.7rem; vertical-align: super; color: #8C2D19;">✦</span></a>
+</nav>
+    </header>
 
-  <article>
-    <h1>About This Space</h1>
-    
-    <p>
-      This site is an antidote to algorithmic feeds, endless scrolling, and modern web clutter. Designed with a book-like aesthetic, it serves as a space for slow thoughts, personal reflections, and deliberate focus.
-    </p>
+    <main>
+      <article>
+        <h1>About This Space</h1>
+        
+        <p>
+          This site is an antidote to algorithmic feeds, endless scrolling, and modern web clutter. Designed with a book-like aesthetic, it serves as a space for slow thoughts, personal reflections, and deliberate focus.
+        </p>
 
-    <p>
-      I am a student writing about reclaiming attention, unlearning digital habits, and returning to deep work and physical books.
-    </p>
+        <p>
+          I am a software engineering student writing about reclaiming attention, unlearning digital habits, and returning to deep work and physical books.
+        </p>
 
-    <p>
-      There are no analytics tracking your visit, no advertisements, and no pop-ups. If you wish to join the conversation or suggest a book, feel free to drop a note in the guestbook.
-    </p>
+        <p>
+          There are no analytics tracking your visit, no advertisements, and no pop-ups. If you wish to join the conversation or suggest a book, feel free to drop a note in the guestbook on the home page.
+        </p>
 
-    <p class="signature">
-      — Written from a quiet desk.
-    </p>
-  </article>
+        <p class="signature" style="font-style: italic; margin-top: 2rem; color: #6A655C;">
+          — Written from a quiet desk.
+        </p>
+      </article>
 
-  <footer>
-    © 2026 — Personal Journal
-  </footer>
-</main>
+            <!-- Call to Action Box -->
+<div class="community-nudge" style="margin: 3rem 0; padding: 1.5rem 2rem; background-color: #f2ede4; border-left: 3px solid #8C2D19; border-radius: 4px;">
+  <h3 style="font-family: 'Libre Baskerville', serif; margin-top: 0; margin-bottom: 0.5rem; font-size: 1.1rem; color: #3a362e;">
+    Have your own reflections to share?
+  </h3>
+  <p style="margin: 0 0 1rem 0; color: #5a554c; font-size: 0.95rem; line-height: 1.5;">
+    Take a quiet moment to contribute to our community corner. Read what others have shared or leave a story of your own.
+  </p>
+  <a href="write-n-share-story.html" style="font-family: 'Libre Baskerville', serif; font-size: 0.9rem; font-weight: bold; color: #8C2D19; text-decoration: none;">
+    Explore & Write Stories &rarr;
+  </a>
+</div>
+
+    </main>
+     <!-- Fixed Bookmark Back-to-Top Button -->
+    <a href="#top" id="backToTopBookmark" aria-label="Back to Top" title="Return to top of page">
+      <span class="bookmark-ribbon"></span>
+      <span class="bookmark-icon">↑</span>
+    </a>
+    <footer>
+      <p>© 2026 — Personal Journal</p>
+    </footer>
+  </div>
 
 </body>
 </html>

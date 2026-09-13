@@ -9,75 +9,61 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
   
-  <!-- Supabase JS Client -->
+  <!-- Supabase JS Client & Central Script -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="js/app.js"></script>
 </head>
 <body>
 
-<div class="container">
-  <header>
-    <a href="index.html" class="site-title">Journal</a>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="reading-list.html" class="active">Reading List</a>
-    </nav>
-  </header>
 
-  <main>
-    <article>
-      <h1>Reading List</h1>
-      <p class="subtitle">A collection of books replacing digital noise with quiet thought.</p>
+  <div class="container">
+    <header>
+      <a href="index.html" class="site-title">Journal</a>
+       <nav>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="reading-list.html">Reading List</a>
+  <a href="write-n-share-story.html" class="nav-highlight">Write & Share <span style="font-size: 0.7rem; vertical-align: super; color: #8C2D19;">✦</span></a>
+</nav>
+    </header>
 
-      <div class="book-group">
-        <div class="group-title">Books I've Read</div>
-        <div id="readBooksContainer">
-          <p class="empty-state">Loading books...</p>
+    <main>
+      <article>
+        <h1>Reading List</h1>
+        <p class="subtitle" style="font-style: italic; color: #7a756b; margin-bottom: 2.5rem;">A collection of books replacing digital noise with quiet thought.</p>
+
+        <div class="book-group">
+          <div class="group-title">Books I've Read</div>
+          <div id="readBooksContainer">
+            <p class="empty-state">Loading books...</p>
+          </div>
         </div>
-      </div>
-    </article>
-  </main>
+      </article>
 
-  <footer>
-    © 2026 — Personal Journal
-  </footer>
+            <!-- Call to Action Box -->
+<div class="community-nudge" style="margin: 3rem 0; padding: 1.5rem 2rem; background-color: #f2ede4; border-left: 3px solid #8C2D19; border-radius: 4px;">
+  <h3 style="font-family: 'Libre Baskerville', serif; margin-top: 0; margin-bottom: 0.5rem; font-size: 1.1rem; color: #3a362e;">
+    Have your own reflections to share?
+  </h3>
+  <p style="margin: 0 0 1rem 0; color: #5a554c; font-size: 0.95rem; line-height: 1.5;">
+    Take a quiet moment to contribute to our community corner. Read what others have shared or leave a story of your own.
+  </p>
+  <a href="write-n-share-story.html" style="font-family: 'Libre Baskerville', serif; font-size: 0.9rem; font-weight: bold; color: #8C2D19; text-decoration: none;">
+    Explore & Write Stories &rarr;
+  </a>
 </div>
-
-<script>
-  const SUPABASE_URL = 'https://gpjzoiaikuwnfobwtftz.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdwanpvaWFpa3V3bmZvYnd0ZnR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkxNjAzMjAsImV4cCI6MjEwNDczNjMyMH0.0eDDirX0hWw0x0QTSIiHQL4Y9MMNzqnbz1SUgS_aehE';
-  const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-  const readBooksContainer = document.getElementById('readBooksContainer');
-
-  async function loadBooks() {
-    const { data, error } = await db
-      .from('read_books')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (error || !data || data.length === 0) {
-      readBooksContainer.innerHTML = '<p class="empty-state">Nothing logged yet.</p>';
-      return;
-    }
-
-    readBooksContainer.innerHTML = data.map(b => `
-      <div class="book-item">
-        <div class="book-title">${escapeHtml(b.book_title)}</div>
-        <div class="book-author">by ${escapeHtml(b.book_author)}</div>
-        ${b.notes ? `<div class="book-notes">${escapeHtml(b.notes)}</div>` : ''}
-      </div>
-    `).join('');
-  }
-
-  function escapeHtml(str) {
-    return str ? str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") : '';
-  }
-
-  loadBooks();
-</script>
+    </main>
+     <!-- Fixed Bookmark Back-to-Top Button -->
+    <a href="#top" id="backToTopBookmark" aria-label="Back to Top" title="Return to top of page">
+      <span class="bookmark-ribbon"></span>
+      <span class="bookmark-icon">↑</span>
+    </a>
+    <footer>
+      <p>© 2026 — Personal Journal</p>
+    </footer>
+  </div>
 
 </body>
 </html>

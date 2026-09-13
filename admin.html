@@ -9,63 +9,49 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="js/app.js"></script>
 </head>
 <body>
 
-<div class="container">
-  <header>
-    <a href="index.html" class="site-title">Journal Admin</a>
-    <nav>
-      <a href="reading-list.html">View Reading List →</a>
-    </nav>
-  </header>
+  <!-- Book Cover Loading Overlay -->
+  <div id="book-loader">
+    <div class="book-cover">
+      <div class="cover-front">
+        <span class="cover-title">Journal</span>
+      </div>
+      <div class="cover-inside"></div>
+    </div>
+  </div>
 
-  <main>
-    <article>
-      <h1>Log a New Book</h1>
-      <p class="subtitle">Private editor entry for adding books to Supabase.</p>
+  <div class="container">
+    <header>
+      <a href="index.html" class="site-title">Journal Admin</a>
+      <nav>
+        <a href="reading-list.html">View Reading List →</a>
+      </nav>
+    </header>
 
-      <form id="bookForm" class="guestbook-form">
-        <input type="text" id="bookTitle" placeholder="Book Title" required class="guestbook-input">
-        <input type="text" id="bookAuthor" placeholder="Author Name" required class="guestbook-input">
-        <textarea id="bookNotes" rows="4" placeholder="Your thoughts, takeaways, or review..." class="guestbook-textarea"></textarea>
-        <button type="submit" class="guestbook-btn">Save to Reading List</button>
-      </form>
-      <p id="statusMessage" style="margin-top: 1rem; font-size: 1rem; color: #6a655c;"></p>
-    </article>
-  </main>
-</div>
+    <main>
+      <article>
+        <h1>Log a New Book</h1>
+        <p class="subtitle" style="font-style: italic; color: #7a756b; margin-bottom: 2.5rem;">Private editor entry for adding books to Supabase.</p>
 
-<script>
-  const SUPABASE_URL = 'https://gpjzoiaikuwnfobwtftz.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdwanpvaWFpa3V3bmZvYnd0ZnR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkxNjAzMjAsImV4cCI6MjEwNDczNjMyMH0.0eDDirX0hWw0x0QTSIiHQL4Y9MMNzqnbz1SUgS_aehE';
-  const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        <form id="bookForm" class="guestbook-form">
+          <input type="text" id="bookTitle" placeholder="Book Title" required class="guestbook-input">
+          <input type="text" id="bookAuthor" placeholder="Author Name" required class="guestbook-input">
+          <textarea id="bookNotes" rows="4" placeholder="Your thoughts, takeaways, or review..." class="guestbook-textarea"></textarea>
+          <button type="submit" class="guestbook-btn">Save to Reading List</button>
+        </form>
+        <p id="statusMessage" style="margin-top: 1rem; font-size: 1rem; color: #6a655c;"></p>
+      </article>
+    </main>
 
-  const bookForm = document.getElementById('bookForm');
-  const statusMessage = document.getElementById('statusMessage');
-
-  bookForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    statusMessage.textContent = 'Saving...';
-
-    const title = document.getElementById('bookTitle').value;
-    const author = document.getElementById('bookAuthor').value;
-    const notes = document.getElementById('bookNotes').value;
-
-    const { error } = await db.from('read_books').insert([
-      { book_title: title, book_author: author, notes: notes }
-    ]);
-
-    if (!error) {
-      statusMessage.textContent = 'Success! Book logged to your reading list.';
-      bookForm.reset();
-    } else {
-      statusMessage.textContent = 'Error saving book. Check Supabase RLS policies.';
-    }
-  });
-</script>
+    <footer>
+      <p>© 2026 — Personal Journal</p>
+    </footer>
+  </div>
 
 </body>
 </html>
